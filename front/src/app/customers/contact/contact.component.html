@@ -1,0 +1,38 @@
+<div class ="p-d-flex p-jc-center p-p-4">
+<!--p-card style="width:640px"-->
+<p-card>
+
+<h2>Contact</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+<div class="p-field p-mb-3">
+<label for ="email" >Email  </label>
+<input id="email" pInputText formControlName="email"/>
+<small *ngIf="email.invalid && (email.touched || email.dirty)" class="p-error">
+    <span *ngIf="email.errors?.['required']">Email requis .</span>
+     <span *ngIf="email.errors?.['email']">Email invalide .</span>
+</small>
+</div>
+
+<div class="p-field p-mb-3">
+<label for ="message" >Message </label>
+<textarea id="message" pInputTextarea rows="6" formControlName="message" maxlength="300"> </textarea>
+<small *ngIf="message.invalid && (message.touched || message.dirty)" class="p-error">
+    <span *ngIf="message.errors?.['required']">Message requis .</span>
+     <span *ngIf="message.errors?.['maxlength']">Le message doit etre inférieur a 300 caractères</span>
+</small>
+<div class="p-mt-1" style = "font-size: 0.85rem; color: #666;">
+    {{message.value?.length || 0 }} / 300
+</div>
+</div>
+<div class="p-d-flex p-jc-end p-mt-3">
+   <button pButton type=" submit" label ="Envoyer" [disabled]="form.invalid" ></button>
+</div>
+
+</form>
+<div *ngIf = "success" class ="p-mt-3" style ="color: #2e7d32; font-weight:600;"> Demande de contact envoyée avec succès</div>
+
+</p-card>
+
+</div>
