@@ -3,6 +3,7 @@ import { Component, OnInit, inject, signal } from "@angular/core";
 import { Product } from "app/products/data-access/product.model";
 import { ProductsService } from "app/products/data-access/products.service";
 import { ProductFormComponent } from "app/products/ui/product-form/product-form.component";
+import { CartService } from "app/shared/services/cart.service";
 import { ButtonModule } from "primeng/button";
 import { CardModule } from "primeng/card";
 import { DataViewModule } from 'primeng/dataview';
@@ -34,12 +35,16 @@ const emptyProduct: Product = {
 })
 export class ProductListComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
+  private readonly CartService = inject(CartService);
 
   public readonly products = this.productsService.products;
 
   public isDialogVisible = false;
   public isCreation = false;
   public readonly editedProduct = signal<Product>(emptyProduct);
+  //Ajouter un signal
+  public readonly cart= signal<Product[]> ([]);
+  
 
   ngOnInit() {
     this.productsService.get().subscribe();
@@ -77,4 +82,32 @@ export class ProductListComponent implements OnInit {
   private closeDialog() {
     this.isDialogVisible = false;
   }
+  // add methods to manipulate the cart
+
+//Add product to cart
+
+/*
+public addToCart(product: Product){
+  const currentCart = [...this.cart()];
+  const existing = currentCart.find(p => p.id === product.id);
+  if (existing) {
+    existing.quantity +=1;
+  }else 
+  {
+    currentCart.push({...product, quantity: 1});
+  }
+  this.cart.set(currentCart);
+}*/
+
+
+
+public addToCart(product: Product){
+  this.CartService.addToCart(product);
+}
+
+//remove from cart 
+
+public removeFromCart(product: Product){
+  this.CartService.removeFromCart(product);
+}
 }

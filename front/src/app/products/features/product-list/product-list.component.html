@@ -20,6 +20,7 @@
                     <div class="flex gap-3 mt-1">
                         <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)"/>
                         <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)" />
+                          <p-button label="Ajouter au panier"  (onClick)="addToCart(product)" class ="mt-2" />
                     </div>
                 </ng-template>
             </p-card>

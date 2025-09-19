@@ -7,8 +7,9 @@
     </div>
     <div class="p-toolbar-group-end">
         <i class="pi pi-shopping-cart" style="font-size: 2rem"></i>
+        <p-badge *ngIf ="cartCount > 0 " [value]="cartCount" severity ="info" [style]="{position: 'absolue', top: '-10px', right: '-10px'}"></p-badge>
     </div>
-</p-toolbar>
+</p-toolbar>'
 <p-splitter 
     [panelSizes]="[20, 80]" 
     [style]="{ height: 'calc(100vh - 100px)' }">
@@ -23,3 +24,22 @@
         </div>
     </ng-template>
 </p-splitter>
+
+<p-dialog [visible] = "isCartVisible()"  (visibleChange) ="isCartVisible.set($event)" header="Panier" [style]="{width: '50vw'}">
+<div *ngIf ="cartService.cart().length === 0" class="text-center text-gray 500">Le panier est vide</div>
+<div *ngFor ="let item of cartService.cart()" class="flex justify-between items-center mb-2 ">
+    <span>{{item.name}} * {{item.quantity}}</span>
+    <p-button label ="Supprimer" severity="danger" (onClick)="cartService.removeFromCart(item)"></p-button>
+    
+</div>
+
+
+<div  class="mt-2 flex justify-end ">
+  
+    <p-button label ="Vider le panier" severity="warning" (onClick)="cartService.clear()"></p-button>
+    
+</div>
+
+
+
+</p-dialog>
