@@ -84,23 +84,6 @@ export class ProductListComponent implements OnInit {
   }
   // add methods to manipulate the cart
 
-//Add product to cart
-
-/*
-public addToCart(product: Product){
-  const currentCart = [...this.cart()];
-  const existing = currentCart.find(p => p.id === product.id);
-  if (existing) {
-    existing.quantity +=1;
-  }else 
-  {
-    currentCart.push({...product, quantity: 1});
-  }
-  this.cart.set(currentCart);
-}*/
-
-
-
 public addToCart(product: Product){
   this.CartService.addToCart(product);
 }
