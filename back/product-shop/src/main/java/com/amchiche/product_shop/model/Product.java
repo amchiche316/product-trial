@@ -10,13 +10,14 @@ public class Product {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String code;
+    private String name;
     @Column(length = 2000)
     private String description;
     private String image;
     private String category;
     private Double price;
     private Integer quantity;
-    private String internatlReference;
+    private String internalReference;
     private Long shellId;
 @Enumerated(EnumType.STRING)
     private InventoryStatus inventoryStatus;

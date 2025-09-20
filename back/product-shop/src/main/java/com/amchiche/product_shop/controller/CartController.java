@@ -38,7 +38,7 @@ public class CartController {
         Long productId = Long.valueOf(body.get("productId"));
         Integer qty = body.getOrDefault("quantity", 1);
         Product product = productRepository.findById(productId).orElseThrow();
-        //TODO the current user with spring security 
+        //TODO the current user with spring security
         return ResponseEntity.ok(ResponseEntity.notFound());
     }
 
