@@ -5,6 +5,7 @@ import com.amchiche.product_shop.repository.ProductRepository;
 import com.amchiche.product_shop.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,19 +32,31 @@ public class ProductController {
         return productRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+//check if the user is an admin
+
+    private boolean isAdmin(){
+
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null) return false;
+        String email = auth.getName();
+        return "admin@admin.com".equalsIgnoreCase(email);
+    }
+
 
     @PostMapping
     public ResponseEntity<?> create(@PathVariable Long id, @RequestBody Product p){
+        if(!isAdmin()) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admin can create products");
         Product saved = productRepository.save(p);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Product p){
-
+        if(!isAdmin()) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admin can update products");
         return productRepository.findById(id).map(
 
                 existing ->{
+                    existing.setName(p.getName());
                     existing.setCode(p.getCode());
                     existing.setDescription(p.getDescription());
                     existing.setPrice(p.getPrice());
@@ -59,6 +72,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
 
     public ResponseEntity<?> delete (@PathVariable Long id){
+        if(!isAdmin()) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admin can delete products");
         productRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
