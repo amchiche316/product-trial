@@ -23,7 +23,7 @@ export class AppComponent {
   title = "ALTEN SHOP";
 
   public readonly cartService = inject(CartService);
-  public isCartVisible = signal(true);
+  public isCartVisible = signal(false);
   // expose cart count
   get cartCount(){
     return this.cartService.count;
