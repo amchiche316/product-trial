@@ -44,7 +44,7 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity<?> create(@PathVariable Long id, @RequestBody Product p){
+    public ResponseEntity<?> create( @RequestBody Product p){
         if(!isAdmin()) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only admin can create products");
         Product saved = productRepository.save(p);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);

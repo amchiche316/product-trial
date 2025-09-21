@@ -1,8 +1,8 @@
 INSERT INTO users (id, username, firstname, email, password)
-VALUES (1, 'admin', 'System', 'admin@admin.com', '{bcrypt}$2a$10$DowJonesStrongHashHere');
+VALUES (1, 'admin23', 'system_user23', 'admin@admin23.com', 'admin23');
 
 INSERT INTO users (id, username, firstname, email, password)
-VALUES (2, 'john', 'John', 'john@example.com', '{bcrypt}$2a$10$AnotherStrongHashHere');
+VALUES (2, 'sam', 'ham', 'sam@ham.com', 'sam$password2025');
 
 -- Products
 INSERT INTO product (id, code, name, description, image, category, price, quantity,
