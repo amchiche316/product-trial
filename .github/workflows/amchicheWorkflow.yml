@@ -1,0 +1,16 @@
+name: initialWorkflow
+on: 
+  push:
+    branches: 
+      - main
+      - release/*
+
+  workflow_dispatch: 
+
+
+jobs:
+  firstJob: 
+    runs-on: ubuntu-latest
+    steps:
+      - run : echo "hello Amchiche"
+    
