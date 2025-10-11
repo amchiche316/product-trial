@@ -15,4 +15,9 @@ jobs:
       - run : echo "hello Amchiche"
       - name: Checkout
         uses: actions/checkout@v5
+      - name: List files in repository
+        run: |
+          echo: "The repository   ${{github.repository}} contains the following files : "
+          tree
+        
     
