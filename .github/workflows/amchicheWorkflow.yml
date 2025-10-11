@@ -13,4 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run : echo "hello Amchiche"
+      - name: Checkout
+        uses: actions/checkout@v5
     
